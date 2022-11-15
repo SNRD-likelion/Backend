@@ -18,7 +18,7 @@ def allData(request, project_id):
         # commentCounts = Comments.objects.annotate(Count('topic'))
 
         for data in data_list:
-            if data.state == "해야할 일":
+            if data.state == "todo":
                 Todo.append(
                     {
                         "state": data.state,
@@ -27,7 +27,7 @@ def allData(request, project_id):
                         "state_index": data.state_index
                     }
                 )
-            elif data.state == "진행 중":
+            elif data.state == "doing":
                 Doing.append(
                     {
                         "state": data.state,
@@ -36,7 +36,7 @@ def allData(request, project_id):
                         "state_index": data.state_index
                     }
                 )
-            elif data.state == "리뷰 중":
+            elif data.state == "review":
                 Review.append(
                     {
                         "state": data.state,
@@ -45,7 +45,7 @@ def allData(request, project_id):
                         "state_index": data.state_index
                     }
                 )
-            elif data.state == "완료":
+            elif data.state == "done":
                 Done.append(
                     {
                         "state": data.state,
@@ -103,7 +103,7 @@ def stateChange(request, project_id):
             # commentCounts = Comments.objects.annotate(Count('topic'))
 
             for data in data_list:
-                if data.state == "해야할 일":
+                if data.state == "todo":
                     Todo.append(
                         {
                             "state": data.state,
@@ -112,7 +112,7 @@ def stateChange(request, project_id):
                             "state_index": data.state_index
                         }
                     )
-                elif data.state == "진행 중":
+                elif data.state == "doing":
                     Doing.append(
                         {
                             "state": data.state,
@@ -121,7 +121,7 @@ def stateChange(request, project_id):
                             "state_index": data.state_index
                         }
                     )
-                elif data.state == "리뷰 중":
+                elif data.state == "review":
                     Review.append(
                         {
                             "state": data.state,
@@ -130,7 +130,7 @@ def stateChange(request, project_id):
                             "state_index": data.state_index
                         }
                     )
-                elif data.state == "완료":
+                elif data.state == "done":
                     Done.append(
                         {
                             "state": data.state,
