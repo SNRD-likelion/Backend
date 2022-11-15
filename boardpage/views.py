@@ -69,25 +69,29 @@ def stateChange(request, project_id):
         review = data['review']
         done = data['done']
 
+        num = 0
         for t in todo:
-            num = t.state_index
             row = Project_contents.objects.get(topic = t.topic)
             row.update(state_index = num)
+            num = num+1
 
+        num = 0
         for d in doing:
-            num = d.state_index
             row = Project_contents.objects.get(topic = d.topic)
             row.update(state_index = num)
+            num = num + 1
 
+        num = 0
         for r in review:
-            num = r.state_index
             row = Project_contents.objects.get(topic = r.topic)
             row.update(state_index = num)
+            num = num + 1
 
+        num = 0
         for d in done:
-            num = d.state_index
             row = Project_contents.objects.get(topic = d.topic)
             row.update(state_index = num)
+            num = num + 1
 
     # 드래그로 db반영이 끝난 이후 5초이후에 프론트에서 refresh할 때 다시 데이터 쏴줌
     # 근데 이럴거면 위에 allData랑 아예 똑같긴해서 이건 프론트랑 협의 필요
