@@ -18,7 +18,7 @@ class Project_contents(models.Model):
     state = models.CharField(max_length=100, null=True, blank=True)
     contents = models.TextField
     category_index = models.IntegerField(default= -1)
-    state_index = models.IntegerField(default=-1)
+    state_index = models.IntegerField(default= -1)
     image = models.TextField(null=True, blank=True)
     project_name = models.ForeignKey('mainpage.Projects', on_delete=models.CASCADE, db_column='project_name',
                                      null=True, blank=True)
