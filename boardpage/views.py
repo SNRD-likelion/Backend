@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from accounts.models import User
 from mainpage.models import Projects, Project_contents, User_Project, Comments
-from django.db.models import Count
+
 import json
 
 # 처음 칸반보드(투두리스트)화면 랜딩될 때 프론트로 데이터 전체 return
@@ -13,45 +13,61 @@ def allData(request, project_id):
         Doing = []
         Review = []
         Done = []
-        Comments = []
-        data_list= Project_contents.objects.filter(project_name=project.project_name)
-        # commentCounts = Comments.objects.annotate(Count('topic'))
 
+
+        # 해당프로젝트의 데이터들을 state별로 그루핑하고 index 오름차순으로 나열
+        data_list = Project_contents.objects\
+            .filter(project_name=project.project_name)\
+            .values('state')\
+            .order_by('state_index')
+        # commentCounts = Comments.objects.annotate(Count('topic'))
+        # comment_list = Comments.objects\
+        #     .filter(project_name=project.project_name)\
+        #     .values('topic')
+        
         for data in data_list:
-            if data.state == "todo":
+            if data.state == 'todo':
+                comment_list = Comments.objects.filter(topic = data.topic, project_name = project.project_name)
                 Todo.append(
                     {
                         "state": data.state,
                         "category": data.category,
                         "topic": data.topic,
-                        "state_index": data.state_index
+                        "state_index": data.state_index,
+                        "comment_list": comment_list
                     }
                 )
-            elif data.state == "doing":
+            elif data.state == 'doing':
+                comment_list = Comments.objects.filter(topic=data.topic, project_name=project.project_name)
                 Doing.append(
                     {
                         "state": data.state,
                         "category": data.category,
                         "topic": data.topic,
-                        "state_index": data.state_index
+                        "state_index": data.state_index,
+                        "comment_list": comment_list
                     }
                 )
-            elif data.state == "review":
+            elif data.state == 'review':
+                comment_list = Comments.objects.filter(topic=data.topic, project_name=project.project_name)
                 Review.append(
                     {
                         "state": data.state,
                         "category": data.category,
                         "topic": data.topic,
-                        "state_index": data.state_index
+                        "state_index": data.state_index,
+                        "comment_list": comment_list
                     }
                 )
-            elif data.state == "done":
+            elif data.state == 'done':
+                comment_list = Comments.objects.filter(topic=data.topic, project_name=project.project_name)
                 Done.append(
                     {
                         "state": data.state,
                         "category": data.category,
                         "topic": data.topic,
-                        "state_index": data.state_index
+                        "state_index": data.state_index,
+                        "comment_list": comment_list
                     }
                 )
 
@@ -72,25 +88,25 @@ def stateChange(request, project_id):
         num = 0
         for t in todo:
             row = Project_contents.objects.get(topic = t.topic)
-            row.update(state_index = num)
+            row.update(state_index = num, state = "todo")
             num = num+1
 
         num = 0
         for d in doing:
             row = Project_contents.objects.get(topic = d.topic)
-            row.update(state_index = num)
+            row.update(state_index = num, state="doing")
             num = num + 1
 
         num = 0
         for r in review:
             row = Project_contents.objects.get(topic = r.topic)
-            row.update(state_index = num)
+            row.update(state_index = num, state="review")
             num = num + 1
 
         num = 0
         for d in done:
             row = Project_contents.objects.get(topic = d.topic)
-            row.update(state_index = num)
+            row.update(state_index = num, state="done")
             num = num + 1
 
     # 드래그로 db반영이 끝난 이후 5초이후에 프론트에서 refresh할 때 다시 데이터 쏴줌
@@ -102,45 +118,60 @@ def stateChange(request, project_id):
             Doing = []
             Review = []
             Done = []
-            Comments = []
-            data_list = Project_contents.objects.filter(project_name=project.project_name)
+
+            # 해당프로젝트의 데이터들을 state별로 그루핑하고 index 오름차순으로 나열
+            data_list = Project_contents.objects \
+                .filter(project_name=project.project_name) \
+                .values('state') \
+                .order_by('state_index')
             # commentCounts = Comments.objects.annotate(Count('topic'))
+            # comment_list = Comments.objects\
+            #     .filter(project_name=project.project_name)\
+            #     .values('topic')
 
             for data in data_list:
-                if data.state == "todo":
+                if data.state == 'todo':
+                    comment_list = Comments.objects.filter(topic=data.topic, project_name=project.project_name)
                     Todo.append(
                         {
                             "state": data.state,
                             "category": data.category,
                             "topic": data.topic,
-                            "state_index": data.state_index
+                            "state_index": data.state_index,
+                            "comment_list": comment_list
                         }
                     )
-                elif data.state == "doing":
+                elif data.state == 'doing':
+                    comment_list = Comments.objects.filter(topic=data.topic, project_name=project.project_name)
                     Doing.append(
                         {
                             "state": data.state,
                             "category": data.category,
                             "topic": data.topic,
-                            "state_index": data.state_index
+                            "state_index": data.state_index,
+                            "comment_list": comment_list
                         }
                     )
-                elif data.state == "review":
+                elif data.state == 'review':
+                    comment_list = Comments.objects.filter(topic=data.topic, project_name=project.project_name)
                     Review.append(
                         {
                             "state": data.state,
                             "category": data.category,
                             "topic": data.topic,
-                            "state_index": data.state_index
+                            "state_index": data.state_index,
+                            "comment_list": comment_list
                         }
                     )
-                elif data.state == "done":
+                elif data.state == 'done':
+                    comment_list = Comments.objects.filter(topic=data.topic, project_name=project.project_name)
                     Done.append(
                         {
                             "state": data.state,
                             "category": data.category,
                             "topic": data.topic,
-                            "state_index": data.state_index
+                            "state_index": data.state_index,
+                            "comment_list": comment_list
                         }
                     )
 
