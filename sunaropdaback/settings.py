@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os, json
 from pathlib import Path
 import pymysql
+from .config import *
 
 pymysql.install_as_MySQLdb()
 
@@ -80,14 +81,29 @@ WSGI_APPLICATION = 'sunaropdaback.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default' : {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'sunaropda',
+#         'USER': 'root',
+#         'PASSWORD': '',
+#         'HOST': 'localhost',
+#         'PORT': '3306',
+#     }
+# }
+
+#rds
 DATABASES = {
     'default' : {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sunaropda',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '3307',
+        'NAME': RDS_NAME,
+        'USER': RDS_USER,
+        'PASSWORD': RDS_PASSWORD,
+        'HOST': RDS_HOST,
+        'PORT': RDS_PORT,
+        'OPTIONS':{
+            'init_command' : "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
     }
 }
 
