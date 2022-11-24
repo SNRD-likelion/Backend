@@ -22,6 +22,7 @@ class Project_contents(models.Model):
     image = models.TextField(null=True, blank=True)
     project_name = models.ForeignKey('mainpage.Projects', on_delete=models.CASCADE, db_column='project_name',
                                      null=True, blank=True)
+    using = models.IntegerField(default= 0) # 누가 수정중이면 1, 수정가능하면 0
 
     def __str__(self):
         return self.name

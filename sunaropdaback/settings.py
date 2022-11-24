@@ -93,6 +93,7 @@ WSGI_APPLICATION = 'sunaropdaback.wsgi.application'
 # }
 
 #rds
+#참고사이트 : https://velog.io/@dojun527/AWS-RDS-Django-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%84%A4%EC%A0%95
 DATABASES = {
     'default' : {
         'ENGINE': 'django.db.backends.mysql',
