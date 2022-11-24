@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'boardpage',
     'mainpage',
     'messagepage',
+    'profilepage',
 ]
 
 MIDDLEWARE = [
@@ -108,16 +109,7 @@ DATABASES = {
     }
 }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': os.environ['DATABASE'],
-#         'USER': os.environ['DB_USER'],
-#         'PASSWORD': os.environ['DB_PASSWORD'],
-#         'HOST': os.environ['DB_HOST'],
-#         'PORT': os.environ['DB_PORT'],
-#     }
-# }
+
 
 
 # Password validation
