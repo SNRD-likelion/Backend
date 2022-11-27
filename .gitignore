@@ -8,6 +8,7 @@ db.sqlite3-journal
 media
 sunaropdaback/config.py
 
+
 accounts/migrations/**
 !accounts/migrations/__init__.py
 boardpage/migrations/**
