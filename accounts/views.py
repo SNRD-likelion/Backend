@@ -8,7 +8,7 @@ from .models import User
 from sunaropdaback.settings import SECRET_KEY  # 로컬이랑 배포일 때 좀 다른 느낌
 from django.http import HttpResponse, JsonResponse
 
-def signUp(request):
+def register(request):
     data = json.loads(request.body)
 
     try:
@@ -26,7 +26,7 @@ def signUp(request):
         return JsonResponse({"message" : "INVALID_KEYS"}, status=400)
 
 
-def signIn(request):
+def login(request):
     data = json.loads(request.body)
 
     try:
@@ -44,3 +44,17 @@ def signIn(request):
 
     except KeyError:
         return JsonResponse({'message': "INVALID_KEYS"}, status=400)
+
+def logout(request):
+    data = json.loads(request.body)
+
+    try:
+        if User.objects.filter(email=data["email"]).exists():
+            return JsonResponse({"token": ""}, status=200)
+
+
+
+        return HttpResponse(status=400)
+
+    except KeyError:
+        return JsonResponse({'message': "Fail"}, status=400)

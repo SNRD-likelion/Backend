@@ -17,7 +17,7 @@ def allData(request, project_id):
 
         # 해당프로젝트의 데이터들을 state별로 그루핑하고 index 오름차순으로 나열
         data_list = Project_contents.objects\
-            .filter(project_name=project.project_name)\
+            .filter(project_id=project.id)\
             .values('state')\
             .order_by('state_index')
         # commentCounts = Comments.objects.annotate(Count('topic'))
@@ -27,7 +27,7 @@ def allData(request, project_id):
         
         for data in data_list:
             if data.state == 'todo':
-                comment_list = Comments.objects.filter(topic = data.topic, project_name = project.project_name)
+                comment_list = Comments.objects.filter(topic = data.topic, project_id = project.id)
                 Todo.append(
                     {
                         "state": data.state,
@@ -38,7 +38,7 @@ def allData(request, project_id):
                     }
                 )
             elif data.state == 'doing':
-                comment_list = Comments.objects.filter(topic=data.topic, project_name=project.project_name)
+                comment_list = Comments.objects.filter(topic=data.topic, project_id = project.id)
                 Doing.append(
                     {
                         "state": data.state,
@@ -49,7 +49,7 @@ def allData(request, project_id):
                     }
                 )
             elif data.state == 'review':
-                comment_list = Comments.objects.filter(topic=data.topic, project_name=project.project_name)
+                comment_list = Comments.objects.filter(topic=data.topic, project_id = project.id)
                 Review.append(
                     {
                         "state": data.state,
@@ -60,7 +60,7 @@ def allData(request, project_id):
                     }
                 )
             elif data.state == 'done':
-                comment_list = Comments.objects.filter(topic=data.topic, project_name=project.project_name)
+                comment_list = Comments.objects.filter(topic=data.topic, project_id = project.id)
                 Done.append(
                     {
                         "state": data.state,
@@ -87,25 +87,25 @@ def stateChange(request, project_id):
 
         num = 0
         for t in todo:
-            row = Project_contents.objects.get(topic = t.topic)
+            row = Project_contents.objects.get(pk = t.id)
             row.update(state_index = num, state = "todo")
             num = num+1
 
         num = 0
         for d in doing:
-            row = Project_contents.objects.get(topic = d.topic)
+            row = Project_contents.objects.get(pk = d.id)
             row.update(state_index = num, state="doing")
             num = num + 1
 
         num = 0
         for r in review:
-            row = Project_contents.objects.get(topic = r.topic)
+            row = Project_contents.objects.get(pk = r.id)
             row.update(state_index = num, state="review")
             num = num + 1
 
         num = 0
         for d in done:
-            row = Project_contents.objects.get(topic = d.topic)
+            row = Project_contents.objects.get(pk = d.id)
             row.update(state_index = num, state="done")
             num = num + 1
 
@@ -131,7 +131,7 @@ def stateChange(request, project_id):
 
             for data in data_list:
                 if data.state == 'todo':
-                    comment_list = Comments.objects.filter(topic=data.topic, project_name=project.project_name)
+                    comment_list = Comments.objects.filter(topic=data.topic, project_id=project.id)
                     Todo.append(
                         {
                             "state": data.state,
@@ -142,7 +142,7 @@ def stateChange(request, project_id):
                         }
                     )
                 elif data.state == 'doing':
-                    comment_list = Comments.objects.filter(topic=data.topic, project_name=project.project_name)
+                    comment_list = Comments.objects.filter(topic=data.topic, project_id=project.id)
                     Doing.append(
                         {
                             "state": data.state,
@@ -153,7 +153,7 @@ def stateChange(request, project_id):
                         }
                     )
                 elif data.state == 'review':
-                    comment_list = Comments.objects.filter(topic=data.topic, project_name=project.project_name)
+                    comment_list = Comments.objects.filter(topic=data.topic, project_id=project.id)
                     Review.append(
                         {
                             "state": data.state,
@@ -164,7 +164,7 @@ def stateChange(request, project_id):
                         }
                     )
                 elif data.state == 'done':
-                    comment_list = Comments.objects.filter(topic=data.topic, project_name=project.project_name)
+                    comment_list = Comments.objects.filter(topic=data.topic, project_id=project.id)
                     Done.append(
                         {
                             "state": data.state,

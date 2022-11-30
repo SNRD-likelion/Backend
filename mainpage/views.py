@@ -16,13 +16,13 @@ def allData(request, project_id):
 
         # 해당프로젝트의 데이터들을 state별로 그루핑하고 index 오름차순으로 나열
         data_list = Project_contents.objects \
-            .filter(project_name=project.project_name) \
+            .filter(project_id=project.id) \
             .values('category') \
             .order_by('category_index')
 
         for data in data_list:
             if data.category == 'PM':
-                comment_list = Comments.objects.filter(topic=data.topic, project_name=project.project_name)
+                comment_list = Comments.objects.filter(topic=data.topic, project_id=project.id)
                 PM.append(
                     {
                         "category": data.category,
@@ -32,7 +32,7 @@ def allData(request, project_id):
                     }
                 )
             elif data.category == 'Design':
-                comment_list = Comments.objects.filter(topic=data.topic, project_name=project.project_name)
+                comment_list = Comments.objects.filter(topic=data.topic, project_id=project.id)
                 Design.append(
                     {
                         "category": data.category,
@@ -42,7 +42,7 @@ def allData(request, project_id):
                     }
                 )
             elif data.category == 'Frontend':
-                comment_list = Comments.objects.filter(topic=data.topic, project_name=project.project_name)
+                comment_list = Comments.objects.filter(topic=data.topic, project_id=project.id)
                 Frontend.append(
                     {
                         "category": data.category,
@@ -52,7 +52,7 @@ def allData(request, project_id):
                     }
                 )
             elif data.category == 'Backend':
-                comment_list = Comments.objects.filter(topic=data.topic, project_name=project.project_name)
+                comment_list = Comments.objects.filter(topic=data.topic, project_id=project.id)
                 Backend.append(
                     {
                         "category": data.category,
@@ -78,25 +78,29 @@ def orderChange(request, project_id):
 
         num = 0
         for p in PM:
-            row = Project_contents.objects.get(topic = p.topic)
+            # topic = p.topic, project_id = project_id, category = "PM"
+            row = Project_contents.objects.get(pk = p.id)
             row.update(category_index = num, category = "PM")
             num = num+1
 
         num = 0
         for d in Design:
-            row = Project_contents.objects.get(topic = d.topic)
+            # topic = d.topic, project_id = project_id, category = "Design"
+            row = Project_contents.objects.get(pk = d.id)
             row.update(category_index = num, category="Design")
             num = num + 1
 
         num = 0
         for f in Frontend:
-            row = Project_contents.objects.get(topic = f.topic)
+            # topic = f.topic, project_id = project_id, category = "Frontend"
+            row = Project_contents.objects.get(pk = f.id)
             row.update(category_index = num, category="Frontend")
             num = num + 1
 
         num = 0
         for b in Backend:
-            row = Project_contents.objects.get(topic = b.topic)
+            # topic = b.topic, project_id = project_id, category = "Backend"
+            row = Project_contents.objects.get(pk = b.id)
             row.update(category_index = num, category="Backend")
             num = num + 1
 
@@ -112,13 +116,13 @@ def orderChange(request, project_id):
 
             # 해당프로젝트의 데이터들을 state별로 그루핑하고 index 오름차순으로 나열
             data_list = Project_contents.objects \
-                .filter(project_name=project.project_name) \
+                .filter(project_id=project.id) \
                 .values('category') \
                 .order_by('category_index')
 
             for data in data_list:
                 if data.category == 'PM':
-                    comment_list = Comments.objects.filter(topic=data.topic, project_name=project.project_name)
+                    comment_list = Comments.objects.filter(topic=data.topic, project_id=project.id)
                     PM.append(
                         {
                             "category": data.category,
@@ -128,7 +132,7 @@ def orderChange(request, project_id):
                         }
                     )
                 elif data.category == 'Design':
-                    comment_list = Comments.objects.filter(topic=data.topic, project_name=project.project_name)
+                    comment_list = Comments.objects.filter(topic=data.topic, project_id=project.id)
                     Design.append(
                         {
                             "category": data.category,
@@ -138,7 +142,7 @@ def orderChange(request, project_id):
                         }
                     )
                 elif data.category == 'Frontend':
-                    comment_list = Comments.objects.filter(topic=data.topic, project_name=project.project_name)
+                    comment_list = Comments.objects.filter(topic=data.topic, project_id=project.id)
                     Frontend.append(
                         {
                             "category": data.category,
@@ -148,7 +152,7 @@ def orderChange(request, project_id):
                         }
                     )
                 elif data.category == 'Backend':
-                    comment_list = Comments.objects.filter(topic=data.topic, project_name=project.project_name)
+                    comment_list = Comments.objects.filter(topic=data.topic, project_id=project.id)
                     Backend.append(
                         {
                             "category": data.category,
