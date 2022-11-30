@@ -17,7 +17,7 @@ def register(request):
 
         User.objects.create(
             email = data['email'],
-            passwod= bcrypt.hashpw(data["password"].encode("UTF-8"), bcrypt.gensalt()).decode("UTF-8")
+            password= bcrypt.hashpw(data["password"].encode("UTF-8"), bcrypt.gensalt()).decode("UTF-8")
         ).save()
 
         return HttpResponse(status=200)
@@ -34,7 +34,8 @@ def login(request):
             user = User.objects.get(email=data["email"])
 
             if bcrypt.checkpw(data['password'].encode('UTF-8'), user.password.encode('UTF-8')):
-                token = jwt.encode({'user': user.id}, SECRET_KEY, algorithm='HS256').decode('UTF-8')
+                token = jwt.encode({'user': user.id}, SECRET_KEY, algorithm='HS256')
+                # .decode('UTF-8')
 
                 return JsonResponse({"token": token}, status=200)
 
