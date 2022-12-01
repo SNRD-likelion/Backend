@@ -17,7 +17,8 @@ def register(request):
 
         User.objects.create(
             email = data['email'],
-            password= bcrypt.hashpw(data["password"].encode("UTF-8"), bcrypt.gensalt()).decode("UTF-8")
+            password= bcrypt.hashpw(data["password"].encode("UTF-8"), bcrypt.gensalt()).decode("UTF-8"),
+            name = data['name']
         ).save()
 
         return HttpResponse(status=200)

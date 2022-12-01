@@ -21,5 +21,5 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('boardpage/', include('boardpage.urls')),
     path('mainpage/', include('mainpage.urls')),
-    # path('profilepage/', include('profilepage.urls')),
+    path('profilepage/', include('profilepage.urls')),
 ]
