@@ -121,7 +121,7 @@ def stateChange(request, project_id):
 
             # 해당프로젝트의 데이터들을 state별로 그루핑하고 index 오름차순으로 나열
             data_list = Project_contents.objects \
-                .filter(project_name=project.project_name) \
+                .filter(project_id=project.id) \
                 .values('state') \
                 .order_by('state_index')
             # commentCounts = Comments.objects.annotate(Count('topic'))
