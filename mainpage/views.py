@@ -165,3 +165,68 @@ def orderChange(request, project_id):
             return JsonResponse({"PM": PM, "Design": Design, "Frontend": Frontend, "Backend": Backend}, status=200)
         except:
             return JsonResponse({"PM": PM, "Design": Design, "Frontend": Frontend, "Backend": Backend}, status=200)
+
+# 댓글작성
+def createComment(request, project_id):
+    data = json.loads(request.body)
+    forState = Project_contents.objects.get(project_id=project_id, category=data['category'], topic=data['topic'])
+    comment = Comments(
+        user = data['email'],
+        contents = data['contents'],
+        project_id = project_id,
+        topic = data['topic'],
+        state = forState.state,
+        category = data['category']
+    )
+    comment.save()
+
+# 프로젝트에 멤버추가(초대)
+def addMember(request, project_id):
+    data = json.loads(request.body)
+    user_project = User_Project(
+        user = data['email'],
+        project_id = project_id
+    )
+    user_project.save()
+
+# 토픽수정시작할 때 post쏴주면 수정중인 사람 있는지 없는지 파악가능
+def editStart(request, project_id):
+    data = json.loads(request.body)
+    project_contents = Project_contents.objects.get(project_id=project_id, topic=data['topic'],
+                                                    category=data['category'])
+
+    if project_contents.using == 1:
+        return JsonResponse({"message": "누군가 수정 중입니다."}, status=200)
+    else:
+        project_contents.update(using=1)
+
+
+# 토픽 내용수정
+def editTopicContents(request, project_id):
+    data = json.loads(request.body)
+    project_contents = Project_contents.objects.get(project_id=project_id, topic=data['topic'], category=data['category'])
+    project_contents.update(contents=data['contents'], using=0)
+
+
+# 토픽 새로추가
+def addTopic(request, project_id):
+    data = json.loads(request.body)
+
+    forProjectName= Projects.objects.get(project_id=project_id)
+    forCountCategory= Project_contents.objects.filter(project_id=project_id, category=data['category'])
+    categoryCount = forCountCategory.count()
+    forCountState = Project_contents.objects.filter(project_id=project_id, state='todo')
+    stateCount = forCountState.count()
+
+    project_contents = Project_contents(
+        category=data['category'],
+        topic=data['topic'],
+        state='todo',
+        content='',
+        category_index=categoryCount,
+        state_index=stateCount,
+        project_name=forProjectName.project_name,
+        project_id=project_id,
+        using=0
+    )
+    project_contents.save()

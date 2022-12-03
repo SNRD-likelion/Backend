@@ -36,6 +36,7 @@ class User_Project(models.Model):
     project_id = models.ForeignKey('mainpage.Projects', on_delete=models.CASCADE, db_column='project_id', null=True, blank=True)
     email = models.ForeignKey('accounts.User', on_delete=models.CASCADE, db_column='email',
                               null=True, blank=True)
+    position = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
         return self.name

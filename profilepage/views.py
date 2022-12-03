@@ -129,7 +129,8 @@ def allData(request, email):
         user = User.objects.get(email=email)
         user_inform = {
             'email': user.email,
-            'name': user.name
+            'name': user.name,
+            'position': user.position
         }
 
         for d in data_list:
@@ -146,6 +147,15 @@ def allData(request, email):
     except:
         return JsonResponse({"project_list": ""}, status=200)
 
+def editPostion(request, email):
+    data = json.loads(request.body)
+    user_project = User_Project.objects.get(email=email, project_id=data['project_id'])
+    user_project.update(position=data['position'])
+
+def editIntro(request, email):
+    data = json.loads(request.body)
+    user = User.objects.get(email=email)
+    user.update(information=data['information'])
 
 
 
