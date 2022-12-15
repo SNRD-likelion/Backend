@@ -1,0 +1,5 @@
+RDS_USER = 'admin'
+RDS_NAME = 'sunaropda-mysql'
+RDS_PASSWORD = 'dksdudgns'
+RDS_HOST = 'sunaropda-mysql.c1whhmptuvqj.ap-northeast-2.rds.amazonaws.com'
+RDS_PORT = '3306'
