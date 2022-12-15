@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os, json
 from pathlib import Path
 import pymysql
-from .config import *
+from config import *
 
 pymysql.install_as_MySQLdb()
 
