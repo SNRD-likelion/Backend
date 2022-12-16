@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'mainpage',
     'messagepage',
     'profilepage',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
