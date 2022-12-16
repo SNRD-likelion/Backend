@@ -1,8 +1,8 @@
 from django.shortcuts import render
-# import jwt
+import jwt
 import bcrypt
 import json
-import PyJWT
+
 
 from .models import User
 
@@ -36,7 +36,7 @@ def login(request):
             user = User.objects.get(email=data['email'])
 
             if bcrypt.checkpw(data["password"].encode('UTF-8'), user.password.encode('UTF-8')):
-                token = PyJWT.encode({'user': user.email}, SECRET_KEY, algorithm='HS256')
+                token = jwt.encode({'user': user.email}, SECRET_KEY, algorithm='HS256')
                 # .decode('UTF-8')
 
 
