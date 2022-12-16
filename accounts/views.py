@@ -21,7 +21,7 @@ def register(request):
             name = data['name']
         ).save()
 
-        return HttpResponse(status=200)
+        return JsonResponse({"message" : "회원가입성공"}, status=200)
 
     except KeyError:
         return JsonResponse({"message" : "INVALID_KEYS"}, status=400)
