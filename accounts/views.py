@@ -31,8 +31,8 @@ def login(request):
     data = json.loads(request.body)
 
     try:
-        if User.objects.filter(email=data["email"]).exists():
-            user = User.objects.get(email=data["email"])
+        if User.objects.filter(email=data['email']).exists():
+            user = User.objects.get(email=data['email'])
 
             if bcrypt.checkpw(data['password'].encode('UTF-8'), user.password.encode('UTF-8')):
                 token = jwt.encode({'user': user.id}, SECRET_KEY, algorithm='HS256')
