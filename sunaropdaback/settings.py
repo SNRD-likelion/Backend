@@ -63,7 +63,7 @@ MIDDLEWARE = [
 ]
 ##CORS 관련 허용 사항 추가
 # CORS_ORIGIN_ALLOW_ALL = True
-CORS_ORIGIN_WHITELIST = ['https://snrd.vercel.app', 'http://localhost:3000']
+CORS_ORIGIN_WHITELIST = ['https://snrd.vercel.app']
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOW_METHODS = (
