@@ -33,7 +33,7 @@ def register(request):
         project = Projects.objects.get(project_name=data['email']+"님의 프로젝트")
 
         user_project = User_Project(
-            project_id=project.id,
+            project_id=project,
             email=data['email']
         )
         user_project.save()
