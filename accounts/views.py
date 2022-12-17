@@ -30,10 +30,9 @@ def register(request):
             duration="프로젝트 기간"
         )
         project.save()
-        project = Projects.objects.get(project_name=data['email']+"님의 프로젝트")
 
         user_project = User_Project(
-            project_id=project,
+            project_id=project.id,
             email=data['email']
         )
         user_project.save()
