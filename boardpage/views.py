@@ -30,6 +30,7 @@ def allData(request, project_id):
                 comment_list = Comments.objects.filter(topic = data.topic, project_id = project.id)
                 Todo.append(
                     {
+                        "id": data.id,
                         "state": data.state,
                         "category": data.category,
                         "topic": data.topic,
@@ -41,6 +42,7 @@ def allData(request, project_id):
                 comment_list = Comments.objects.filter(topic=data.topic, project_id = project.id)
                 Doing.append(
                     {
+                        "id": data.id,
                         "state": data.state,
                         "category": data.category,
                         "topic": data.topic,
@@ -52,6 +54,7 @@ def allData(request, project_id):
                 comment_list = Comments.objects.filter(topic=data.topic, project_id = project.id)
                 Review.append(
                     {
+                        "id": data.id,
                         "state": data.state,
                         "category": data.category,
                         "topic": data.topic,
@@ -63,6 +66,7 @@ def allData(request, project_id):
                 comment_list = Comments.objects.filter(topic=data.topic, project_id = project.id)
                 Done.append(
                     {
+                        "id": data.id,
                         "state": data.state,
                         "category": data.category,
                         "topic": data.topic,
@@ -134,6 +138,7 @@ def stateChange(request, project_id):
                     comment_list = Comments.objects.filter(topic=data.topic, project_id=project.id)
                     Todo.append(
                         {
+                            "id": data.id,
                             "state": data.state,
                             "category": data.category,
                             "topic": data.topic,
@@ -145,6 +150,7 @@ def stateChange(request, project_id):
                     comment_list = Comments.objects.filter(topic=data.topic, project_id=project.id)
                     Doing.append(
                         {
+                            "id": data.id,
                             "state": data.state,
                             "category": data.category,
                             "topic": data.topic,
@@ -156,6 +162,7 @@ def stateChange(request, project_id):
                     comment_list = Comments.objects.filter(topic=data.topic, project_id=project.id)
                     Review.append(
                         {
+                            "id": data.id,
                             "state": data.state,
                             "category": data.category,
                             "topic": data.topic,
@@ -167,6 +174,7 @@ def stateChange(request, project_id):
                     comment_list = Comments.objects.filter(topic=data.topic, project_id=project.id)
                     Done.append(
                         {
+                            "id": data.id,
                             "state": data.state,
                             "category": data.category,
                             "topic": data.topic,
@@ -179,5 +187,25 @@ def stateChange(request, project_id):
         except:
             return JsonResponse({"todo": Todo, "doing": Doing, "review": Review, "done": Done}, status=200)
         
+def addTopic(request, project_id):
+    data = json.loads(request.body)
 
+    forProjectName= Projects.objects.get(project_id=project_id)
+    forCountCategory= Project_contents.objects.filter(project_id=project_id, category=data['category'])
+    categoryCount = forCountCategory.count()
+    forCountState = Project_contents.objects.filter(project_id=project_id, state=data['state'])
+    stateCount = forCountState.count()
+
+    project_contents = Project_contents(
+        category=data['category'],
+        topic=data['topic'],
+        state=data['state'],
+        content='',
+        category_index=categoryCount,
+        state_index=stateCount,
+        project_name=forProjectName.project_name,
+        project_id=project_id,
+        using=0
+    )
+    project_contents.save()
 

@@ -9,16 +9,22 @@ from accounts.models import User
 def createProject(request):
     data = json.loads(request.body)
     project = Projects(
-        project_name = data['project_name']
+        project_name = data['project_name'],
+        slogan= data['slogan'],
+        duration= data['duration']
     )
     project.save()
 
-    project = Projects.objects.get(project_name = data['project_name'])
-    user_project = User_Project(
-        project_id = project.id,
-        email = data['email']
-    )
-    user_project.save()
+    project = Projects.objects.get(project_name=data['project_name'], slogan=data['slogan'])
+    teammates = data['teammates']
+    for t in teammates:
+        user_project= User_Project(
+            project_id=project.id,
+            email=t
+        )
+        user_project.save()
+
+
 
     #프로젝트에 topic들 미리 넣어주기(가이드라인)
     # project_contents = Project_contents(
@@ -130,15 +136,22 @@ def allData(request, email):
         user_inform = {
             'email': user.email,
             'name': user.name,
-            'position': user.position
+            'information': user.information
         }
 
         for d in data_list:
             a = Projects.objects.get(pk=d.project_id)
+            user_project = User_Project.objects.filter(project_id=d.project_id)
+            userlist=[]
+            for u in user_project:
+                userlist.append(u.email)
             project_list.append(
                 {
-                    'project_name': a.project_name,
-                    'project_id': d.project_id
+                    'id': d.project_id,
+                    'title': a.project_name,
+                    'teammates': userlist,
+                    'duration' : a.duration,
+                    'introduction' : a.slogan
                 }
             )
 
@@ -155,7 +168,7 @@ def editPostion(request, email):
 def editIntro(request, email):
     data = json.loads(request.body)
     user = User.objects.get(email=email)
-    user.update(information=data['information'])
+    user.update(information=data['information'], name=data['name'])
 
 
 

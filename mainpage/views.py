@@ -25,6 +25,7 @@ def allData(request, project_id):
                 comment_list = Comments.objects.filter(topic=data.topic, project_id=project.id)
                 PM.append(
                     {
+                        "id": data.id,
                         "category": data.category,
                         "topic": data.topic,
                         "category_index": data.category_index,
@@ -35,6 +36,7 @@ def allData(request, project_id):
                 comment_list = Comments.objects.filter(topic=data.topic, project_id=project.id)
                 Design.append(
                     {
+                        "id": data.id,
                         "category": data.category,
                         "topic": data.topic,
                         "category_index": data.category_index,
@@ -45,6 +47,7 @@ def allData(request, project_id):
                 comment_list = Comments.objects.filter(topic=data.topic, project_id=project.id)
                 Frontend.append(
                     {
+                        "id": data.id,
                         "category": data.category,
                         "topic": data.topic,
                         "category_index": data.category_index,
@@ -55,6 +58,7 @@ def allData(request, project_id):
                 comment_list = Comments.objects.filter(topic=data.topic, project_id=project.id)
                 Backend.append(
                     {
+                        "id": data.id,
                         "category": data.category,
                         "topic": data.topic,
                         "category_index": data.category_index,
@@ -125,6 +129,7 @@ def orderChange(request, project_id):
                     comment_list = Comments.objects.filter(topic=data.topic, project_id=project.id)
                     PM.append(
                         {
+                            "id": data.id,
                             "category": data.category,
                             "topic": data.topic,
                             "category_index": data.category_index,
@@ -135,6 +140,7 @@ def orderChange(request, project_id):
                     comment_list = Comments.objects.filter(topic=data.topic, project_id=project.id)
                     Design.append(
                         {
+                            "id": data.id,
                             "category": data.category,
                             "topic": data.topic,
                             "category_index": data.category_index,
@@ -145,6 +151,7 @@ def orderChange(request, project_id):
                     comment_list = Comments.objects.filter(topic=data.topic, project_id=project.id)
                     Frontend.append(
                         {
+                            "id": data.id,
                             "category": data.category,
                             "topic": data.topic,
                             "category_index": data.category_index,
@@ -155,6 +162,7 @@ def orderChange(request, project_id):
                     comment_list = Comments.objects.filter(topic=data.topic, project_id=project.id)
                     Backend.append(
                         {
+                            "id": data.id,
                             "category": data.category,
                             "topic": data.topic,
                             "category_index": data.category_index,
@@ -181,30 +189,48 @@ def createComment(request, project_id):
     comment.save()
 
 # 프로젝트에 멤버추가(초대)
-def addMember(request, project_id):
+# def addMember(request, project_id):
+#     data = json.loads(request.body)
+#     user_project = User_Project(
+#         user = data['email'],
+#         project_id = project_id
+#     )
+#     user_project.save()
+
+#프로젝트 정보수정
+def editProjectInfo(request, project_id):
     data = json.loads(request.body)
-    user_project = User_Project(
-        user = data['email'],
-        project_id = project_id
-    )
-    user_project.save()
+    project = Projects.objects.get(pk=project_id)
+    project.update(project_name=data['title'], duration=data['duration'], slogan=data['slogan'])
+    teammates = data['teammates']
+
+    for t in teammates:
+        user_project= User_Project(
+            project_id=project_id,
+            email=t
+        )
+        user_project.save()
+
 
 # 토픽수정시작할 때 post쏴주면 수정중인 사람 있는지 없는지 파악가능
 def editStart(request, project_id):
     data = json.loads(request.body)
-    project_contents = Project_contents.objects.get(project_id=project_id, topic=data['topic'],
-                                                    category=data['category'])
+    project_contents = Project_contents.objects.get(pk=data['id'])
 
     if project_contents.using == 1:
         return JsonResponse({"message": "누군가 수정 중입니다."}, status=200)
     else:
         project_contents.update(using=1)
 
+def editTopicTitle(request, project_id):
+    data = json.loads(request.body)
+    project_contents = Project_contents.objects.get(pk=data['id'])
+    project_contents.update(topic=data['topic'])
 
 # 토픽 내용수정
 def editTopicContents(request, project_id):
     data = json.loads(request.body)
-    project_contents = Project_contents.objects.get(project_id=project_id, topic=data['topic'], category=data['category'])
+    project_contents = Project_contents.objects.get(pk=data['id'])
     project_contents.update(contents=data['contents'], using=0)
 
 

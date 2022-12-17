@@ -4,6 +4,8 @@ from django.db import models
 class Projects(models.Model):
     project_name = models.CharField(max_length=100, null=True)
     createdAt = models.DateTimeField(auto_now_add=True, null=True)
+    slogan = models.CharField(max_length=400, null=True)
+    duration = models.CharField(max_length=500, null=True)
 
     def __str__(self):
         return self.name
