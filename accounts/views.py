@@ -31,8 +31,9 @@ def register(request):
         )
         project.save()
 
+        ppp=Projects.objects.get(project_name=data['email']+"님의 프로젝트", createdAt=project.createdAt)
         user_project = User_Project(
-            project_id=Projects.objects.get(project_name=data['email']+"님의 프로젝트"),
+            project_id=ppp,
             email=User.objects.get(email=data['email'])
         )
         user_project.save()
