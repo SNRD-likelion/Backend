@@ -18,7 +18,7 @@ class Project_contents(models.Model):
     category = models.CharField(max_length=100, null=True, blank=True)
     topic = models.CharField(max_length=100, null=True, blank=True)
     state = models.CharField(max_length=100, null=True, blank=True)
-    contents = models.TextField
+    contents = models.TextField(blank=True)
     category_index = models.IntegerField(default= -1)
     state_index = models.IntegerField(default= -1)
     image = models.TextField(null=True, blank=True)
