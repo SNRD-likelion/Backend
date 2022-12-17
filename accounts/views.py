@@ -82,7 +82,7 @@ def register(request):
                 content=PM_contents[i],
                 category_index=i,
                 state_index=j,
-                project_name=data['email']+"님의 프로젝트",
+                project_name=ppp,
                 project_id=ppp,
                 using=0
             )
@@ -100,7 +100,7 @@ def register(request):
                 content=Design_contents[i],
                 category_index=i,
                 state_index=i,
-                project_name=data['email']+"님의 프로젝트",
+                project_name=ppp,
                 project_id=ppp,
                 using=0
             )
@@ -118,7 +118,7 @@ def register(request):
                 content=Frontend_contents[i],
                 category_index=i,
                 state_index=i,
-                project_name=data['email']+"님의 프로젝트",
+                project_name=ppp,
                 project_id=ppp,
                 using=0
             )
@@ -136,7 +136,7 @@ def register(request):
                 content=Backend_contents[i],
                 category_index=i,
                 state_index=i,
-                project_name=data['email']+"님의 프로젝트",
+                project_name=ppp,
                 project_id=ppp,
                 using=0
             )
