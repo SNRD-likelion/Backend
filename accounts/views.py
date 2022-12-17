@@ -83,7 +83,7 @@ def register(request):
                 category_index=i,
                 state_index=j,
                 project_name=data['email']+"님의 프로젝트",
-                project_id=Projects.objects.get(project_name=data['email']+"님의 프로젝트"),
+                project_id=ppp,
                 using=0
             )
             project_contents.save()
@@ -101,7 +101,7 @@ def register(request):
                 category_index=i,
                 state_index=i,
                 project_name=data['email']+"님의 프로젝트",
-                project_id=Projects.objects.get(project_name=data['email']+"님의 프로젝트"),
+                project_id=ppp,
                 using=0
             )
             project_contents.save()
@@ -119,7 +119,7 @@ def register(request):
                 category_index=i,
                 state_index=i,
                 project_name=data['email']+"님의 프로젝트",
-                project_id=Projects.objects.get(project_name=data['email']+"님의 프로젝트"),
+                project_id=ppp,
                 using=0
             )
             project_contents.save()
@@ -137,7 +137,7 @@ def register(request):
                 category_index=i,
                 state_index=i,
                 project_name=data['email']+"님의 프로젝트",
-                project_id=Projects.objects.get(project_name=data['email']+"님의 프로젝트"),
+                project_id=ppp,
                 using=0
             )
             project_contents.save()
