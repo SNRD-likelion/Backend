@@ -19,7 +19,8 @@ def register(request):
         User.objects.create(
             email = data['email'],
             password= bcrypt.hashpw(data["password"].encode("UTF-8"), bcrypt.gensalt()).decode("UTF-8"),
-            name = data['name']
+            name = data['name'],
+            information = "나이를 입력하세요, 파트를 입력하세요, 학교/회사 이름을 입력해주세요, 나를 표현하는 한줄을 적어주세요"
         ).save()
 
         return JsonResponse({"message" : "회원가입성공"}, status=200)
