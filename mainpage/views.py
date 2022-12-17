@@ -69,7 +69,7 @@ def allData(request, project_id):
 # 카테고리 내에서 순서 변경
 def orderChange(request, project_id):
     # 드래그로 토픽의 상태 바뀔 때 db에 반영
-    if request.method == 'PUT':
+    if request.method == 'POST':
         data = json.loads(request.body)
         PM = data['PM']
         Design = data['Design']
