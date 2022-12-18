@@ -108,7 +108,7 @@ def register(request):
         i = 0
         j = 0
         while i < 7:
-            project_contents = Project_contents(
+            project_contents = Project_content(
                 category='PM',
                 topic=PM[i],
                 state='todo',
@@ -126,7 +126,7 @@ def register(request):
         # Design에 미리 넣어주기
         i = 0
         while i < 4:
-            project_contents = Project_contents(
+            project_contents = Project_content(
                 category='Design',
                 topic=Design[i],
                 state='todo',
@@ -144,7 +144,7 @@ def register(request):
         # Front에 미리 넣어주기
         i = 0
         while i < 6:
-            project_contents = Project_contents(
+            project_contents = Project_content(
                 category='Frontend',
                 topic=Frontend[i],
                 state='todo',
@@ -162,7 +162,7 @@ def register(request):
         # Back에 미리 넣어주기
         i = 0
         while i < 9:
-            project_contents = Project_contents(
+            project_contents = Project_content(
                 category='Backend',
                 topic=Backend[i],
                 state='todo',
