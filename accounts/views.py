@@ -5,7 +5,7 @@ import json
 
 
 from .models import User
-from mainpage.models import Projects, User_Project, Project_contents
+from mainpage.models import Projects, User_Project, Project_content
 
 from sunaropdaback.settings import SECRET_KEY  # 로컬이랑 배포일 때 좀 다른 느낌
 from django.http import HttpResponse, JsonResponse
@@ -106,81 +106,76 @@ def register(request):
 
         # PM에 미리 넣어주기
         i = 0
-        forCount = Project_contents.objects.filter(state='todo')
-        j = forCount.count()
-        while j < j + 26:
-            while i < 7:
-                project_contents = Project_contents(
-                    category='PM',
-                    topic=PM[i],
-                    state='todo',
-                    contents=PM_contents[i],
-                    category_index=i,
-                    state_index=j,
-                    project_name=ppp,
-                    project_id=ppp,
-                    using=0
-                )
-                project_contents.save()
-                i = i + 1
-                j = j + 1
+        j = 0
+        while i < 7:
+            project_contents = Project_contents(
+                category='PM',
+                topic=PM[i],
+                state='todo',
+                contents=PM_contents[i],
+                category_index=i,
+                state_index=j,
+                project_name=ppp,
+                project_id=ppp,
+                using=0
+            )
+            project_contents.save()
+            i = i + 1
+            j = j + 1
 
-            # Design에 미리 넣어주기
-            i = 0
-            while i < 4:
+        # Design에 미리 넣어주기
+        i = 0
+        while i < 4:
+            project_contents = Project_contents(
+                category='Design',
+                topic=Design[i],
+                state='todo',
+                contents=Design_contents[i],
+                category_index=i,
+                state_index=j,
+                project_name=ppp,
+                project_id=ppp,
+                using=0
+            )
+            project_contents.save()
+            i = i + 1
+            j = j + 1
 
-                project_contents = Project_contents(
-                    category='Design',
-                    topic=Design[i],
-                    state='todo',
-                    contents=Design_contents[i],
-                    category_index=i,
-                    state_index=j,
-                    project_name=ppp,
-                    project_id=ppp,
-                    using=0
-                )
-                project_contents.save()
-                i = i + 1
-                j = j + 1
+        # Front에 미리 넣어주기
+        i = 0
+        while i < 6:
+            project_contents = Project_contents(
+                category='Frontend',
+                topic=Frontend[i],
+                state='todo',
+                contents=Frontend_contents[i],
+                category_index=i,
+                state_index=j,
+                project_name=ppp,
+                project_id=ppp,
+                using=0
+            )
+            project_contents.save()
+            i = i + 1
+            j = j + 1
 
-            # Front에 미리 넣어주기
-            i = 0
-            while i < 6:
-
-                project_contents = Project_contents(
-                    category='Frontend',
-                    topic=Frontend[i],
-                    state='todo',
-                    contents=Frontend_contents[i],
-                    category_index=i,
-                    state_index=j,
-                    project_name=ppp,
-                    project_id=ppp,
-                    using=0
-                )
-                project_contents.save()
-                i = i + 1
-                j = j + 1
-
-            # Back에 미리 넣어주기
-            i = 0
-            while i < 9:
-
-                project_contents = Project_contents(
-                    category='Backend',
-                    topic=Backend[i],
-                    state='todo',
-                    contents=Backend_contents[i],
-                    category_index=i,
-                    state_index=j,
-                    project_name=ppp,
-                    project_id=ppp,
-                    using=0
-                )
-                project_contents.save()
-                i = i + 1
-                j = j + 1
+        # Back에 미리 넣어주기
+        i = 0
+        while i < 9:
+            project_contents = Project_contents(
+                category='Backend',
+                topic=Backend[i],
+                state='todo',
+                contents=Backend_contents[i],
+                category_index=i,
+                state_index=j,
+                project_name=ppp,
+                project_id=ppp,
+                using=0
+            )
+            project_contents.save()
+            i = i + 1
+            j = j + 1
 
         return JsonResponse({"message" : "회원가입성공"}, status=200)
 

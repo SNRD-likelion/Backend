@@ -14,10 +14,10 @@ class Projects(models.Model):
         db_table = 'projects'
 
 
-class Project_contents(models.Model):
+class Project_content(models.Model):
     category = models.CharField(max_length=100, null=True, blank=True)
-    topic = models.CharField(max_length=100, null=True, blank=True)
-    state = models.CharField(max_length=100, null=True, blank=True)
+    topic = models.CharField(max_length=150, null=True, blank=True)
+    state = models.CharField(max_length=150, null=True, blank=True)
     contents = models.TextField(blank=True)
     category_index = models.IntegerField(default= -1)
     state_index = models.IntegerField(default= -1)
@@ -51,10 +51,10 @@ class Comments(models.Model):
                               null=True, blank=True)
     contents = models.TextField
     project_id = models.ForeignKey('mainpage.Projects', on_delete=models.CASCADE, db_column='project_id', null=True, blank=True)
-    topic = models.ForeignKey('mainpage.Project_contents', related_name='+', on_delete=models.CASCADE, db_column='topic',
+    topic = models.ForeignKey('mainpage.Project_content', related_name='+', on_delete=models.CASCADE, db_column='topic',
                                      null=True, blank=True)
-    state = models.ForeignKey('mainpage.Project_contents', related_name='+', on_delete=models.CASCADE, db_column='state', null=True, blank=True)
-    category = models.ForeignKey('mainpage.Project_contents', related_name='+', on_delete=models.CASCADE, db_column='category',
+    state = models.ForeignKey('mainpage.Project_content', related_name='+', on_delete=models.CASCADE, db_column='state', null=True, blank=True)
+    category = models.ForeignKey('mainpage.Project_content', related_name='+', on_delete=models.CASCADE, db_column='category',
                                  null=True, blank=True)
     createdAt = models.DateTimeField(auto_now_add=True, null=True)
 

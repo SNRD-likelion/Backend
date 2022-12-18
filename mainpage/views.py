@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from accounts.models import User
-from .models import Projects, Project_contents, User_Project, Comments
+from .models import Projects, Project_content, User_Project, Comments
 
 import json
 
@@ -15,7 +15,7 @@ def allData(request, project_id):
         Backend = []
 
         # 해당프로젝트의 데이터들을 state별로 그루핑하고 index 오름차순으로 나열
-        data_list = Project_contents.objects \
+        data_list = Project_content.objects \
             .filter(project_id=project.id) \
             .values('category') \
             .order_by('category_index')
@@ -83,28 +83,28 @@ def orderChange(request, project_id):
         num = 0
         for p in PM:
             # topic = p.topic, project_id = project_id, category = "PM"
-            row = Project_contents.objects.get(pk = p.id)
+            row = Project_content.objects.get(pk = p.id)
             row.update(category_index = num, category = "PM")
             num = num+1
 
         num = 0
         for d in Design:
             # topic = d.topic, project_id = project_id, category = "Design"
-            row = Project_contents.objects.get(pk = d.id)
+            row = Project_content.objects.get(pk = d.id)
             row.update(category_index = num, category="Design")
             num = num + 1
 
         num = 0
         for f in Frontend:
             # topic = f.topic, project_id = project_id, category = "Frontend"
-            row = Project_contents.objects.get(pk = f.id)
+            row = Project_content.objects.get(pk = f.id)
             row.update(category_index = num, category="Frontend")
             num = num + 1
 
         num = 0
         for b in Backend:
             # topic = b.topic, project_id = project_id, category = "Backend"
-            row = Project_contents.objects.get(pk = b.id)
+            row = Project_content.objects.get(pk = b.id)
             row.update(category_index = num, category="Backend")
             num = num + 1
 
@@ -119,7 +119,7 @@ def orderChange(request, project_id):
             Backend = []
 
             # 해당프로젝트의 데이터들을 state별로 그루핑하고 index 오름차순으로 나열
-            data_list = Project_contents.objects \
+            data_list = Project_content.objects \
                 .filter(project_id=project.id) \
                 .values('category') \
                 .order_by('category_index')
@@ -177,7 +177,7 @@ def orderChange(request, project_id):
 # 댓글작성
 def createComment(request, project_id):
     data = json.loads(request.body)
-    forState = Project_contents.objects.get(project_id=project_id, category=data['category'], topic=data['topic'])
+    forState = Project_content.objects.get(project_id=project_id, category=data['category'], topic=data['topic'])
     comment = Comments(
         user = data['email'],
         contents = data['contents'],
@@ -215,7 +215,7 @@ def editProjectInfo(request, project_id):
 # 토픽수정시작할 때 post쏴주면 수정중인 사람 있는지 없는지 파악가능
 def editStart(request, project_id):
     data = json.loads(request.body)
-    project_contents = Project_contents.objects.get(pk=data['id'])
+    project_contents = Project_content.objects.get(pk=data['id'])
 
     if project_contents.using == 1:
         return JsonResponse({"message": "누군가 수정 중입니다."}, status=200)
@@ -224,13 +224,13 @@ def editStart(request, project_id):
 
 def editTopicTitle(request, project_id):
     data = json.loads(request.body)
-    project_contents = Project_contents.objects.get(pk=data['id'])
+    project_contents = Project_content.objects.get(pk=data['id'])
     project_contents.update(topic=data['topic'])
 
 # 토픽 내용수정
 def editTopicContents(request, project_id):
     data = json.loads(request.body)
-    project_contents = Project_contents.objects.get(pk=data['id'])
+    project_contents = Project_content.objects.get(pk=data['id'])
     project_contents.update(contents=data['contents'], using=0)
 
 
@@ -239,12 +239,12 @@ def addTopic(request, project_id):
     data = json.loads(request.body)
 
     forProjectName= Projects.objects.get(project_id=project_id)
-    forCountCategory= Project_contents.objects.filter(project_id=project_id, category=data['category'])
+    forCountCategory= Project_content.objects.filter(project_id=project_id, category=data['category'])
     categoryCount = forCountCategory.count()
-    forCountState = Project_contents.objects.filter(project_id=project_id, state='todo')
+    forCountState = Project_content.objects.filter(project_id=project_id, state='todo')
     stateCount = forCountState.count()
 
-    project_contents = Project_contents(
+    project_contents = Project_content(
         category=data['category'],
         topic=data['topic'],
         state='todo',

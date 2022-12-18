@@ -2,7 +2,7 @@ import json
 
 from django.http import JsonResponse
 from django.shortcuts import render
-from mainpage.models import Projects, Project_contents, User_Project, Comments
+from mainpage.models import Projects, Project_content, User_Project, Comments
 from accounts.models import User
 
 # 프로젝트 생성
@@ -106,81 +106,76 @@ def createProject(request):
 
     # PM에 미리 넣어주기
     i = 0
-    forCount = Project_contents.objects.filter(state='todo')
-    j=forCount.count()
-    while j < j+26:
-        while i < 7:
-            project_contents = Project_contents(
-                category='PM',
-                topic=PM[i],
-                state='todo',
-                contents=PM_contents[i],
-                category_index=i,
-                state_index=j,
-                project_name=ppp,
-                project_id=ppp,
-                using=0
-            )
-            project_contents.save()
-            i = i + 1
-            j = j + 1
+    j = 0
+    while i < 7:
+        project_contents = Project_contents(
+            category='PM',
+            topic=PM[i],
+            state='todo',
+            contents=PM_contents[i],
+            category_index=i,
+            state_index=j,
+            project_name=ppp,
+            project_id=ppp,
+            using=0
+        )
+        project_contents.save()
+        i = i + 1
+        j = j + 1
 
-        # Design에 미리 넣어주기
-        i = 0
-        while i < 4:
-            j = j+7+i
-            project_contents = Project_contents(
-                category='Design',
-                topic=Design[i],
-                state='todo',
-                contents=Design_contents[i],
-                category_index=i,
-                state_index=j,
-                project_name=ppp,
-                project_id=ppp,
-                using=0
-            )
-            project_contents.save()
-            i = i + 1
-            j = j + 1
+    # Design에 미리 넣어주기
+    i = 0
+    while i < 4:
+        project_contents = Project_contents(
+            category='Design',
+            topic=Design[i],
+            state='todo',
+            contents=Design_contents[i],
+            category_index=i,
+            state_index=j,
+            project_name=ppp,
+            project_id=ppp,
+            using=0
+        )
+        project_contents.save()
+        i = i + 1
+        j = j + 1
 
-        # Front에 미리 넣어주기
-        i = 0
-        while i < 6:
-            j = j + 11 + i
-            project_contents = Project_contents(
-                category='Frontend',
-                topic=Frontend[i],
-                state='todo',
-                contents=Frontend_contents[i],
-                category_index=i,
-                state_index=j,
-                project_name=ppp,
-                project_id=ppp,
-                using=0
-            )
-            project_contents.save()
-            i = i + 1
-            j = j + 1
+    # Front에 미리 넣어주기
+    i = 0
+    while i < 6:
+        project_contents = Project_contents(
+            category='Frontend',
+            topic=Frontend[i],
+            state='todo',
+            contents=Frontend_contents[i],
+            category_index=i,
+            state_index=j,
+            project_name=ppp,
+            project_id=ppp,
+            using=0
+        )
+        project_contents.save()
+        i = i + 1
+        j = j + 1
 
-        # Back에 미리 넣어주기
-        i = 0
-        while i < 9:
-            j = j + 17 + i
-            project_contents = Project_contents(
-                category='Backend',
-                topic=Backend[i],
-                state='todo',
-                contents=Backend_contents[i],
-                category_index=i,
-                state_index=j,
-                project_name=ppp,
-                project_id=ppp,
-                using=0
-            )
-            project_contents.save()
-            i = i + 1
-            j = j + 1
+    # Back에 미리 넣어주기
+    i = 0
+    while i < 9:
+        project_contents = Project_contents(
+            category='Backend',
+            topic=Backend[i],
+            state='todo',
+            contents=Backend_contents[i],
+            category_index=i,
+            state_index=j,
+            project_name=ppp,
+            project_id=ppp,
+            using=0
+        )
+        project_contents.save()
+        i = i + 1
+        j = j + 1
 
 
 

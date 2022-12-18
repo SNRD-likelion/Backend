@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render
 from accounts.models import User
-from mainpage.models import Projects, Project_contents, User_Project, Comments
+from mainpage.models import Projects, Project_content, User_Project, Comments
 
 import json
 
@@ -16,7 +16,7 @@ def allData(request, project_id):
 
 
         # 해당프로젝트의 데이터들을 state별로 그루핑하고 index 오름차순으로 나열
-        data_list = Project_contents.objects\
+        data_list = Project_content.objects\
             .filter(project_id=project.id)\
             .values('state')\
             .order_by('state_index')
@@ -91,25 +91,25 @@ def stateChange(request, project_id):
 
         num = 0
         for t in todo:
-            row = Project_contents.objects.get(pk = t.id)
+            row = Project_content.objects.get(pk = t.id)
             row.update(state_index = num, state = "todo")
             num = num+1
 
         num = 0
         for d in doing:
-            row = Project_contents.objects.get(pk = d.id)
+            row = Project_content.objects.get(pk = d.id)
             row.update(state_index = num, state="doing")
             num = num + 1
 
         num = 0
         for r in review:
-            row = Project_contents.objects.get(pk = r.id)
+            row = Project_content.objects.get(pk = r.id)
             row.update(state_index = num, state="review")
             num = num + 1
 
         num = 0
         for d in done:
-            row = Project_contents.objects.get(pk = d.id)
+            row = Project_content.objects.get(pk = d.id)
             row.update(state_index = num, state="done")
             num = num + 1
 
@@ -124,7 +124,7 @@ def stateChange(request, project_id):
             Done = []
 
             # 해당프로젝트의 데이터들을 state별로 그루핑하고 index 오름차순으로 나열
-            data_list = Project_contents.objects \
+            data_list = Project_content.objects \
                 .filter(project_id=project.id) \
                 .values('state') \
                 .order_by('state_index')
@@ -191,12 +191,12 @@ def addTopic(request, project_id):
     data = json.loads(request.body)
 
     forProjectName= Projects.objects.get(project_id=project_id)
-    forCountCategory= Project_contents.objects.filter(project_id=project_id, category=data['category'])
+    forCountCategory= Project_content.objects.filter(project_id=project_id, category=data['category'])
     categoryCount = forCountCategory.count()
-    forCountState = Project_contents.objects.filter(project_id=project_id, state=data['state'])
+    forCountState = Project_content.objects.filter(project_id=project_id, state=data['state'])
     stateCount = forCountState.count()
 
-    project_contents = Project_contents(
+    project_contents = Project_content(
         category=data['category'],
         topic=data['topic'],
         state=data['state'],
