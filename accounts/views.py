@@ -106,7 +106,8 @@ def register(request):
 
         # PM에 미리 넣어주기
         i = 0
-        j = 0
+        forCount = Project_content.objects.filter(state='todo')
+        j = forCount.count
         while i < 7:
             project_contents = Project_content(
                 category='PM',
