@@ -183,6 +183,7 @@ def createProject(request):
 
 # 프로필 페이지 정보 및 프로젝트들 정보 전달
 def allData(request, user_id):
+        data = json.loads(request.body)
         project_list = []
         user = User.objects.get(pk=user_id)
         user_inform = {
@@ -201,7 +202,7 @@ def allData(request, user_id):
                 userlist.append(u.email)
             project_list.append(
                 {
-                    'id': a.id,
+                    'id': int(a.id),
                     'title': a.project_name,
                     'teammates': userlist,
                     'duration' : a.duration,
