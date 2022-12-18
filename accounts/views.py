@@ -132,7 +132,7 @@ def register(request):
                 state='todo',
                 contents=Design_contents[i],
                 category_index=i,
-                state_index=i,
+                state_index=j,
                 project_name=ppp,
                 project_id=ppp,
                 using=0
@@ -150,7 +150,7 @@ def register(request):
                 state='todo',
                 contents=Frontend_contents[i],
                 category_index=i,
-                state_index=i,
+                state_index=j,
                 project_name=ppp,
                 project_id=ppp,
                 using=0
@@ -168,7 +168,7 @@ def register(request):
                 state='todo',
                 contents=Backend_contents[i],
                 category_index=i,
-                state_index=i,
+                state_index=j,
                 project_name=ppp,
                 project_id=ppp,
                 using=0
