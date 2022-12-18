@@ -182,15 +182,15 @@ def createProject(request):
 
 
 # 프로필 페이지 정보 및 프로젝트들 정보 전달
-def allData(request, email):
-        data_list = User_Project.objects.filter(email=email)
+def allData(request, user_id):
         project_list = []
-        user = User.objects.get(email=email)
+        user = User.objects.get(pk=user_id)
         user_inform = {
             'email': user.email,
             'name': user.name,
             'information': user.information
         }
+        data_list = User_Project.objects.filter(email=user.email)
         print(user.email)
         print(user.information)
         for d in data_list:
@@ -212,14 +212,14 @@ def allData(request, email):
 
         return JsonResponse({"project_list": project_list, "user": user_inform}, status=200)
 
-def editPostion(request, email):
+def editPostion(request, user_id):
     data = json.loads(request.body)
-    user_project = User_Project.objects.get(email=email, project_id=data['project_id'])
+    user_project = User_Project.objects.get(email=data['email'], project_id=data['project_id'])
     user_project.update(position=data['position'])
 
-def editIntro(request, email):
+def editIntro(request, user_id):
     data = json.loads(request.body)
-    user = User.objects.get(email=email)
+    user = User.objects.get(email=data['email'])
     user.update(information=data['information'], name=data['name'])
 
 
