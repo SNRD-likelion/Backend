@@ -128,7 +128,7 @@ def register(request):
             # Design에 미리 넣어주기
             i = 0
             while i < 4:
-                j = j + 7 + i
+
                 project_contents = Project_contents(
                     category='Design',
                     topic=Design[i],
@@ -147,7 +147,7 @@ def register(request):
             # Front에 미리 넣어주기
             i = 0
             while i < 6:
-                j = j + 11 + i
+
                 project_contents = Project_contents(
                     category='Frontend',
                     topic=Frontend[i],
@@ -166,7 +166,7 @@ def register(request):
             # Back에 미리 넣어주기
             i = 0
             while i < 9:
-                j = j + 17 + i
+
                 project_contents = Project_contents(
                     category='Backend',
                     topic=Backend[i],
@@ -181,6 +181,7 @@ def register(request):
                 project_contents.save()
                 i = i + 1
                 j = j + 1
+
         return JsonResponse({"message" : "회원가입성공"}, status=200)
 
     except KeyError:
