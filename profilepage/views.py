@@ -193,6 +193,7 @@ def allData(request, user_id):
             'name': user.name,
             'information': user.information
         }
+        print("bbbb")
         data_list = User_Project.objects.filter(email=user.email)
         print(user.email)
         print(user.information)
