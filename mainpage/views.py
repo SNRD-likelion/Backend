@@ -22,7 +22,7 @@ def allData(request, project_id):
 
         for data in data_list:
             if data.category == 'PM':
-                comment_list = Comments.objects.filter(topic=data.topic, project_id=project.id)
+                comment_list = Comments.objects.filter(topic=data.topic, project_id=project_id)
                 PM.append(
                     {
                         "id": data.id,
