@@ -200,7 +200,8 @@ def allData(request, user_id):
         for d in data_list:
             a = Projects.objects.get(pk=d)
             print("cccccc")
-            user_project = User_Project.objects.filter(project_id=d.project_id)
+            user_project = User_Project.objects.filter(project_id=a)
+            # d.project_id
             print("ddddd")
             userlist=[]
             # a_data = Projects.objects.get(pk=a)
