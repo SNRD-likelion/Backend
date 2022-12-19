@@ -210,7 +210,7 @@ def logout(request):
 
     try:
         if User.objects.filter(email=data["email"]).exists():
-            return JsonResponse({"token": ""}, status=200)
+            return JsonResponse({"message": "logout!"}, status=200)
 
 
 

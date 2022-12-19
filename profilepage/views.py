@@ -203,7 +203,7 @@ def allData(request, user_id):
                 userlist.append(u.email)
             project_list.append(
                 {
-                    'project_id': a.id,
+                    'project_id': d.project_id,
                     'title': a.project_name,
                     'teammates': userlist,
                     'duration' : a.duration,
