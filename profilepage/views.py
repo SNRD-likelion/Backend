@@ -199,12 +199,15 @@ def allData(request, user_id):
         print(user.information)
         for d in data_list:
             a = Projects.objects.get(pk=d.project_id)
+            print("cccccc")
             user_project = User_Project.objects.filter(project_id=d.project_id)
+            print("ddddd")
             userlist=[]
             # a_data = Projects.objects.get(pk=a)
-            print("cccccc")
+            print("fffff")
             for u in user_project:
                 userlist.append(u.email)
+            print("ggggg")
             project_list.append(
                 {
                     'project_id': a.id,
