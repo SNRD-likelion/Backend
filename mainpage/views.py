@@ -16,8 +16,9 @@ def allData(request, project_id):
         # 해당프로젝트의 데이터들을 state별로 그루핑하고 index 오름차순으로 나열
         data_list = Project_content.objects \
             .filter(project_id=project_id) \
-            .values('category') \
             .order_by('category_index')
+
+        # .values('category') \
 
         for data in data_list:
             if data.category == 'PM':
