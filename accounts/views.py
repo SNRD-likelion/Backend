@@ -196,7 +196,7 @@ def login(request):
                 # .decode('UTF-8')
 
 
-                return JsonResponse({"token": token}, status=200)
+                return JsonResponse({"token": token, "id": user.id}, status=200)
 
             return HttpResponse(status=401)
 
