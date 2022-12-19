@@ -1,4 +1,4 @@
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 from accounts.models import User
 from mainpage.models import Projects, Project_content, User_Project, Comments
@@ -7,7 +7,6 @@ import json
 
 # 처음 칸반보드(투두리스트)화면 랜딩될 때 프론트로 데이터 전체 return
 def allData(request, project_id):
-    try:
         project = Projects.objects.get(pk=project_id)
         Todo = []
         Doing = []
@@ -81,8 +80,6 @@ def allData(request, project_id):
 
 
         return JsonResponse({"todo": Todo, "doing": Doing, "review": Review, "done": Done}, status=200)
-    except:
-        return JsonResponse({"todo": Todo, "doing": Doing, "review": Review, "done": Done}, status=200)
 
 def stateChange(request, project_id):
     # 드래그로 토픽의 상태 바뀔 때 db에 반영
@@ -95,27 +92,33 @@ def stateChange(request, project_id):
 
         num = 0
         for t in todo:
-            row = Project_content.objects.get(pk = t.id)
-            row.update(state_index = num, state = "todo")
+            row = Project_content.objects.get(pk = t['id'])
+            row.state_index = num
+            row.state = "todo"
             num = num+1
 
         num = 0
         for d in doing:
-            row = Project_content.objects.get(pk = d.id)
-            row.update(state_index = num, state="doing")
+            row = Project_content.objects.get(pk = d['id'])
+            row.state_index = num
+            row.state = "todo"
             num = num + 1
 
         num = 0
         for r in review:
-            row = Project_content.objects.get(pk = r.id)
-            row.update(state_index = num, state="review")
+            row = Project_content.objects.get(pk = r['id'])
+            row.state_index = num
+            row.state = "todo"
             num = num + 1
 
         num = 0
         for d in done:
-            row = Project_content.objects.get(pk = d.id)
-            row.update(state_index = num, state="done")
+            row = Project_content.objects.get(pk = d['id'])
+            row.state_index = num
+            row.state = "todo"
             num = num + 1
+
+        return HttpResponse(status=200)
 
     # 드래그로 db반영이 끝난 이후 5초이후에 프론트에서 refresh할 때 다시 데이터 쏴줌
     # 근데 이럴거면 위에 allData랑 아예 똑같긴해서 이건 프론트랑 협의 필요
