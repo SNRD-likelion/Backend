@@ -209,7 +209,7 @@ def allData(request, user_id):
             # a_data = Projects.objects.get(pk=a)
             print("fffff")
             for u in user_project:
-                userlist.append(u.email)
+                userlist.append(str(u.email))
             print("ggggg")
             project_list.append(
                 {
