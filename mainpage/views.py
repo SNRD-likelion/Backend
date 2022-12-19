@@ -23,7 +23,8 @@ def allData(request, project_id):
         for data in data_list:
             print("aaaa")
             if data.category == 'PM':
-                comment_list = Comments.objects.filter(topic=data.topic, project_id=project_id)
+                # comment_list = Comments.objects.filter(topic=data.topic, project_id=project_id)
+                comment_list = []
                 print("bbb")
                 PM.append(
                     {
@@ -35,7 +36,8 @@ def allData(request, project_id):
                     }
                 )
             elif data.category == 'Design':
-                comment_list = Comments.objects.filter(topic=data.topic, project_id=project.id)
+                # comment_list = Comments.objects.filter(topic=data.topic, project_id=project_id)
+                comment_list = []
                 Design.append(
                     {
                         "id": data.id,
@@ -46,7 +48,8 @@ def allData(request, project_id):
                     }
                 )
             elif data.category == 'Frontend':
-                comment_list = Comments.objects.filter(topic=data.topic, project_id=project.id)
+                # comment_list = Comments.objects.filter(topic=data.topic, project_id=project_id)
+                comment_list = []
                 Frontend.append(
                     {
                         "id": data.id,
@@ -57,7 +60,8 @@ def allData(request, project_id):
                     }
                 )
             elif data.category == 'Backend':
-                comment_list = Comments.objects.filter(topic=data.topic, project_id=project.id)
+                # comment_list = Comments.objects.filter(topic=data.topic, project_id=project_id)
+                comment_list = []
                 Backend.append(
                     {
                         "id": data.id,
