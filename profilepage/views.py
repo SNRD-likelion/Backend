@@ -185,6 +185,7 @@ def createProject(request):
 # 프로필 페이지 정보 및 프로젝트들 정보 전달
 def allData(request, user_id):
         # data = json.loads(request.body)
+        print("aaaa")
         project_list = []
         user = User.objects.get(pk=user_id)
         user_inform = {
