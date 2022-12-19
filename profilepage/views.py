@@ -199,7 +199,8 @@ def allData(request, user_id):
         print(user.information)
         for d in data_list:
             print("zzzzzz")
-            a = Projects.objects.get(pk=d)
+            forA=d.id
+            a = Projects.objects.get(pk=forA)
             print("cccccc")
             user_project = User_Project.objects.filter(project_id=a.id)
             # d.project_id
