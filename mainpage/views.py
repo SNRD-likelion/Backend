@@ -21,8 +21,10 @@ def allData(request, project_id):
         # .values('category') \
 
         for data in data_list:
+            print("aaaa")
             if data.category == 'PM':
                 comment_list = Comments.objects.filter(topic=data.topic, project_id=project_id)
+                print("bbb")
                 PM.append(
                     {
                         "id": data.id,
