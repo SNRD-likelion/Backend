@@ -220,6 +220,7 @@ def allData(request, user_id):
                     'introduction' : a.slogan
                 }
             )
+            print("hhhhh")
 
 
         return JsonResponse({"project_list": project_list, "user": user_inform}, status=200)
