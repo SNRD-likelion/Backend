@@ -91,28 +91,28 @@ def orderChange(request, project_id):
         num = 0
         for p in PM:
             # topic = p.topic, project_id = project_id, category = "PM"
-            row = Project_content.objects.get(pk = p.id)
+            row = Project_content.objects.get(pk = p)
             row.update(category_index = num, category = "PM")
             num = num+1
 
         num = 0
         for d in Design:
             # topic = d.topic, project_id = project_id, category = "Design"
-            row = Project_content.objects.get(pk = d.id)
+            row = Project_content.objects.get(pk = d)
             row.update(category_index = num, category="Design")
             num = num + 1
 
         num = 0
         for f in Frontend:
             # topic = f.topic, project_id = project_id, category = "Frontend"
-            row = Project_content.objects.get(pk = f.id)
+            row = Project_content.objects.get(pk = f)
             row.update(category_index = num, category="Frontend")
             num = num + 1
 
         num = 0
         for b in Backend:
             # topic = b.topic, project_id = project_id, category = "Backend"
-            row = Project_content.objects.get(pk = b.id)
+            row = Project_content.objects.get(pk = b)
             row.update(category_index = num, category="Backend")
             num = num + 1
 
