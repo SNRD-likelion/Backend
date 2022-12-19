@@ -92,28 +92,37 @@ def orderChange(request, project_id):
         for p in PM:
             # topic = p.topic, project_id = project_id, category = "PM"
             row = Project_content.objects.get(pk = p['id'])
-            row.update(category_index = num, category = "PM")
+            # row.update(category_index = num, category = "PM")
+            row.category_index = num
+            row.category = "PM"
             num = num+1
 
         num = 0
         for d in Design:
             # topic = d.topic, project_id = project_id, category = "Design"
             row = Project_content.objects.get(pk = d['id'])
-            row.update(category_index = num, category="Design")
+            # row.update(category_index = num, category="Design")
+            row.category_index = num
+            row.category = "Design"
             num = num + 1
+
 
         num = 0
         for f in Frontend:
             # topic = f.topic, project_id = project_id, category = "Frontend"
             row = Project_content.objects.get(pk = f['id'])
-            row.update(category_index = num, category="Frontend")
+            # row.update(category_index = num, category="Frontend")
+            row.category_index = num
+            row.category = "Frontend"
             num = num + 1
 
         num = 0
         for b in Backend:
             # topic = b.topic, project_id = project_id, category = "Backend"
             row = Project_content.objects.get(pk = b['id'])
-            row.update(category_index = num, category="Backend")
+            # row.update(category_index = num, category="Backend")
+            row.category_index = num
+            row.category = "Backend"
             num = num + 1
 
         return HttpResponse(status=200)
