@@ -189,7 +189,7 @@ def allData(request, user_id):
         project_list = []
         user = User.objects.get(pk=user_id)
         user_inform = {
-            'email': user.email,
+            'email': str(user.email),
             'name': user.name,
             'information': user.information
         }
