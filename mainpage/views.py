@@ -91,8 +91,8 @@ def orderChange(request, project_id):
         num = 0
         for p in PM:
             # topic = p.topic, project_id = project_id, category = "PM"
+            print(p)
             forP =p.id
-            print(forP)
             row = Project_content.objects.get(pk = forP)
             row.update(category_index = num, category = "PM")
             num = num+1
