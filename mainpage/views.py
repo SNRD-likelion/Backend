@@ -247,14 +247,14 @@ def editTopicTitle(request, project_id):
     project_contents.update(topic=data['topic'])
 
 # 토픽 내용수정
-def editTopicContents(request, project_id):
+def editTopicContents(request, project_id, topic_id):
     data = json.loads(request.body)
     project_contents = Project_content.objects.get(pk=data['id'])
-    project_contents.update(contents=data['contents'], using=0)
-
+    # project_contents.update(contents=data['contents'], using=0)
+    project_contents.contents=data['contents']
 
 # 토픽 새로추가
-def addTopic(request, project_id):
+def addTopic(request, project_id, topic_id):
     data = json.loads(request.body)
 
     forProjectName= Projects.objects.get(project_id=project_id)
