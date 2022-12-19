@@ -198,6 +198,7 @@ def allData(request, user_id):
         print(user.email)
         print(user.information)
         for d in data_list:
+            print("zzzzzz")
             a = Projects.objects.get(pk=d)
             print("cccccc")
             user_project = User_Project.objects.filter(project_id=a.id)
