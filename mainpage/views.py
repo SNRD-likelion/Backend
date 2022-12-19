@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from accounts.models import User
 from .models import Projects, Project_content, User_Project, Comments
 
@@ -107,6 +107,8 @@ def orderChange(request, project_id):
             row = Project_content.objects.get(pk = b.id)
             row.update(category_index = num, category="Backend")
             num = num + 1
+
+        return HttpResponse(status=200)
 
     # 드래그로 db반영이 끝난 이후 5초이후에 프론트에서 refresh할 때 다시 데이터 쏴줌
     # 근데 이럴거면 위에 allData랑 아예 똑같긴해서 이건 프론트랑 협의 필요
