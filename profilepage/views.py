@@ -202,6 +202,7 @@ def allData(request, user_id):
             user_project = User_Project.objects.filter(project_id=d.project_id)
             userlist=[]
             a_data = Projects.objects.get(pk=a)
+            print("cccccc")
             for u in user_project:
                 userlist.append(u.email)
             project_list.append(
