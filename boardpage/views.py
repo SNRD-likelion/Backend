@@ -18,8 +18,8 @@ def allData(request, project_id):
         # 해당프로젝트의 데이터들을 state별로 그루핑하고 index 오름차순으로 나열
         data_list = Project_content.objects\
             .filter(project_id=project.id)\
-            .values('state')\
             .order_by('state_index')
+        # .values('state')\
         # commentCounts = Comments.objects.annotate(Count('topic'))
         # comment_list = Comments.objects\
         #     .filter(project_name=project.project_name)\
@@ -27,7 +27,8 @@ def allData(request, project_id):
         
         for data in data_list:
             if data.state == 'todo':
-                comment_list = Comments.objects.filter(topic = data.topic, project_id = project.id)
+                # comment_list = Comments.objects.filter(topic=data.topic, project_id=project_id)
+                comment_list = []
                 Todo.append(
                     {
                         "id": data.id,
@@ -39,7 +40,8 @@ def allData(request, project_id):
                     }
                 )
             elif data.state == 'doing':
-                comment_list = Comments.objects.filter(topic=data.topic, project_id = project.id)
+                # comment_list = Comments.objects.filter(topic=data.topic, project_id=project_id)
+                comment_list = []
                 Doing.append(
                     {
                         "id": data.id,
@@ -51,7 +53,8 @@ def allData(request, project_id):
                     }
                 )
             elif data.state == 'review':
-                comment_list = Comments.objects.filter(topic=data.topic, project_id = project.id)
+                # comment_list = Comments.objects.filter(topic=data.topic, project_id=project_id)
+                comment_list = []
                 Review.append(
                     {
                         "id": data.id,
@@ -63,7 +66,8 @@ def allData(request, project_id):
                     }
                 )
             elif data.state == 'done':
-                comment_list = Comments.objects.filter(topic=data.topic, project_id = project.id)
+                # comment_list = Comments.objects.filter(topic=data.topic, project_id=project_id)
+                comment_list = []
                 Done.append(
                     {
                         "id": data.id,

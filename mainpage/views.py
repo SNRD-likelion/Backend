@@ -21,18 +21,19 @@ def allData(request, project_id):
         # .values('category') \
 
         for data in data_list:
-            print("aaaa")
+
             if data.category == 'PM':
                 # comment_list = Comments.objects.filter(topic=data.topic, project_id=project_id)
                 comment_list = []
-                print("bbb")
+
                 PM.append(
                     {
                         "id": data.id,
                         "category": data.category,
                         "topic": data.topic,
                         "category_index": data.category_index,
-                        "comment_list": comment_list
+                        "comment_list": comment_list,
+                        "contents": data.contents
                     }
                 )
             elif data.category == 'Design':
@@ -44,7 +45,8 @@ def allData(request, project_id):
                         "category": data.category,
                         "topic": data.topic,
                         "category_index": data.category_index,
-                        "comment_list": comment_list
+                        "comment_list": comment_list,
+                        "contents": data.contents
                     }
                 )
             elif data.category == 'Frontend':
@@ -56,7 +58,8 @@ def allData(request, project_id):
                         "category": data.category,
                         "topic": data.topic,
                         "category_index": data.category_index,
-                        "comment_list": comment_list
+                        "comment_list": comment_list,
+                        "contents": data.contents
                     }
                 )
             elif data.category == 'Backend':
@@ -68,7 +71,8 @@ def allData(request, project_id):
                         "category": data.category,
                         "topic": data.topic,
                         "category_index": data.category_index,
-                        "comment_list": comment_list
+                        "comment_list": comment_list,
+                        "contents": data.contents
                     }
                 )
 
