@@ -7,7 +7,6 @@ import json
 
 # 처음 프로젝트 메인화면 랜딩될 때 전체 데이터 return
 def allData(request, project_id):
-    try:
         project = Projects.objects.get(pk=project_id)
         PM = []
         Design = []
@@ -66,8 +65,6 @@ def allData(request, project_id):
                     }
                 )
 
-        return JsonResponse({"PM": PM, "Design": Design, "Frontend": Frontend, "Backend": Backend}, status=200)
-    except:
         return JsonResponse({"PM": PM, "Design": Design, "Frontend": Frontend, "Backend": Backend}, status=200)
 
 # 카테고리 내에서 순서 변경
