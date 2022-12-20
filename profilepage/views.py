@@ -9,7 +9,7 @@ from accounts.models import User
 def createProject(request, user_id):
     data = json.loads(request.body)
     project = Projects(
-        project_name = data['project_name'],
+        project_name = data['title'],
         slogan= data['slogan'],
         duration= data['duration']
     )
