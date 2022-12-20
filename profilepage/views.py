@@ -19,10 +19,12 @@ def createProject(request, user_id):
     teammates = data['teammates']
     # ppp = Projects.objects.get(project_name=data['email'] + "님의 프로젝트", createdAt=project.createdAt)
     ppp = Projects.objects.get(project_name=data['title'], createdAt=project.createdAt)
+
     for t in teammates:
+        forEmail = User.objects.get(email=t)
         user_project= User_Project(
             project_id=ppp,
-            email=t
+            email=forEmail
         )
         user_project.save()
 
