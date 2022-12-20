@@ -87,7 +87,7 @@ def orderChange(request, project_id):
         Design = data['Design']
         Frontend = data['Frontend']
         Backend = data['Backend']
-
+        print(PM)
         num = 0
         for p in PM:
             # topic = p.topic, project_id = project_id, category = "PM"
