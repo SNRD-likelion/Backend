@@ -96,6 +96,7 @@ def orderChange(request, project_id):
             row.category_index = num
             row.category = "PM"
             num = num+1
+        print(PM)
 
         num = 0
         for d in Design:
