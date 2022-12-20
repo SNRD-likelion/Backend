@@ -231,7 +231,7 @@ def editPostion(request, user_id):
 
 def editIntro(request, user_id):
     data = json.loads(request.body)
-    user = User.objects.get(email=data['email'])
+    user = User.objects.get(pk=user_id)
     user.information = data['information']
     user.name = data['name']
     user.save()
