@@ -95,6 +95,7 @@ def orderChange(request, project_id):
             # row.update(category_index = num, category = "PM")
             row.category_index = num
             row.category = "PM"
+            row.save()
             num = num+1
         print(PM)
 
@@ -105,6 +106,7 @@ def orderChange(request, project_id):
             # row.update(category_index = num, category="Design")
             row.category_index = num
             row.category = "Design"
+            row.save()
             num = num + 1
 
 
@@ -115,6 +117,7 @@ def orderChange(request, project_id):
             # row.update(category_index = num, category="Frontend")
             row.category_index = num
             row.category = "Frontend"
+            row.save()
             num = num + 1
 
         num = 0
@@ -124,6 +127,7 @@ def orderChange(request, project_id):
             # row.update(category_index = num, category="Backend")
             row.category_index = num
             row.category = "Backend"
+            row.save()
             num = num + 1
 
         return HttpResponse(status=200)
