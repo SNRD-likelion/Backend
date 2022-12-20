@@ -6,7 +6,7 @@ from mainpage.models import Projects, Project_content, User_Project, Comments
 from accounts.models import User
 
 # 프로젝트 생성
-def createProject(request):
+def createProject(request, user_id):
     data = json.loads(request.body)
     project = Projects(
         project_name = data['project_name'],
