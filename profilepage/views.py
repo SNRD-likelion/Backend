@@ -185,7 +185,7 @@ def createProject(request):
 # 프로필 페이지 정보 및 프로젝트들 정보 전달
 def allData(request, user_id):
         # data = json.loads(request.body)
-        print("aaaa")
+
         project_list = []
         user = User.objects.get(pk=user_id)
         user_inform = {
@@ -193,24 +193,24 @@ def allData(request, user_id):
             'name': user.name,
             'information': user.information
         }
-        print("bbbb")
+
         data_list = User_Project.objects.filter(email=user)
         print(user.email)
         print(user.information)
         for d in data_list:
-            print("zzzzzz")
+
             forA=d.id
             a = Projects.objects.get(pk=forA)
-            print("cccccc")
+
             user_project = User_Project.objects.filter(project_id=a.id)
             # d.project_id
-            print("ddddd")
+
             userlist=[]
             # a_data = Projects.objects.get(pk=a)
-            print("fffff")
+
             for u in user_project:
                 userlist.append(str(u.email))
-            print("ggggg")
+
             project_list.append(
                 {
                     'project_id': a.id,
@@ -220,7 +220,7 @@ def allData(request, user_id):
                     'introduction' : a.slogan
                 }
             )
-            print("hhhhh")
+
 
 
         return JsonResponse({"project_list": project_list, "user": user_inform}, status=200)

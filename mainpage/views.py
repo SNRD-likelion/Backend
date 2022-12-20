@@ -87,7 +87,7 @@ def orderChange(request, project_id):
         Design = data['Design']
         Frontend = data['Frontend']
         Backend = data['Backend']
-        print(PM)
+
         num = 0
         for p in PM:
             # topic = p.topic, project_id = project_id, category = "PM"
@@ -97,7 +97,7 @@ def orderChange(request, project_id):
             row.category = "PM"
             row.save()
             num = num+1
-        print(PM)
+
 
         num = 0
         for d in Design:
@@ -257,6 +257,8 @@ def editTopicContents(request, project_id, topic_id):
     project_contents = Project_content.objects.get(pk=data['id'])
     # project_contents.update(contents=data['contents'], using=0)
     project_contents.contents=data['contents']
+
+    return HttpResponse(status=200)
 
 # 토픽 새로추가
 def addTopic(request, project_id, topic_id):

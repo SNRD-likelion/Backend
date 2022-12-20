@@ -95,6 +95,7 @@ def stateChange(request, project_id):
             row = Project_content.objects.get(pk = t['id'])
             row.state_index = num
             row.state = "todo"
+            row.save()
             num = num+1
 
         num = 0
@@ -102,6 +103,7 @@ def stateChange(request, project_id):
             row = Project_content.objects.get(pk = d['id'])
             row.state_index = num
             row.state = "todo"
+            row.save()
             num = num + 1
 
         num = 0
@@ -109,6 +111,7 @@ def stateChange(request, project_id):
             row = Project_content.objects.get(pk = r['id'])
             row.state_index = num
             row.state = "todo"
+            row.save()
             num = num + 1
 
         num = 0
@@ -116,6 +119,7 @@ def stateChange(request, project_id):
             row = Project_content.objects.get(pk = d['id'])
             row.state_index = num
             row.state = "todo"
+            row.save()
             num = num + 1
 
         return HttpResponse(status=200)
@@ -133,7 +137,6 @@ def stateChange(request, project_id):
             # 해당프로젝트의 데이터들을 state별로 그루핑하고 index 오름차순으로 나열
             data_list = Project_content.objects \
                 .filter(project_id=project.id) \
-                .values('state') \
                 .order_by('state_index')
             # commentCounts = Comments.objects.annotate(Count('topic'))
             # comment_list = Comments.objects\
