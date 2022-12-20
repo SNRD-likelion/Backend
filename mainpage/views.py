@@ -261,6 +261,7 @@ def editTopicContents(request, project_id, topic_id):
     project_contents = Project_content.objects.get(pk=data['id'])
     # project_contents.update(contents=data['contents'], using=0)
     project_contents.contents=data['contents']
+    project_contents.using = 0
     project_contents.save()
 
     return HttpResponse(status=200)

@@ -102,7 +102,7 @@ def stateChange(request, project_id):
         for d in doing:
             row = Project_content.objects.get(pk = d['id'])
             row.state_index = num
-            row.state = "todo"
+            row.state = "doing"
             row.save()
             num = num + 1
 
@@ -110,7 +110,7 @@ def stateChange(request, project_id):
         for r in review:
             row = Project_content.objects.get(pk = r['id'])
             row.state_index = num
-            row.state = "todo"
+            row.state = "review"
             row.save()
             num = num + 1
 
@@ -118,7 +118,7 @@ def stateChange(request, project_id):
         for d in done:
             row = Project_content.objects.get(pk = d['id'])
             row.state_index = num
-            row.state = "todo"
+            row.state = "done"
             row.save()
             num = num + 1
 
