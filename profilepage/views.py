@@ -1,6 +1,6 @@
 import json
 
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 from mainpage.models import Projects, Project_content, User_Project, Comments
 from accounts.models import User
@@ -178,8 +178,7 @@ def createProject(request):
         i = i + 1
         j = j + 1
 
-
-
+    return HttpResponse(status=200)
 
 
 # 프로필 페이지 정보 및 프로젝트들 정보 전달
@@ -233,7 +232,11 @@ def editPostion(request, user_id):
 def editIntro(request, user_id):
     data = json.loads(request.body)
     user = User.objects.get(email=data['email'])
-    user.update(information=data['information'], name=data['name'])
+    user.information = data['information']
+    user.name = data['name']
+    user.save()
+
+    return HttpResponse(status=200)
 
 
 

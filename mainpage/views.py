@@ -244,12 +244,16 @@ def editStart(request, project_id):
     if project_contents.using == 1:
         return JsonResponse({"message": "누군가 수정 중입니다."}, status=200)
     else:
-        project_contents.update(using=1)
+        project_contents.using = 1
+        project_contents.save()
 
-def editTopicTitle(request, project_id):
+def editTopicTitle(request, project_id, topic_id):
     data = json.loads(request.body)
     project_contents = Project_content.objects.get(pk=data['id'])
-    project_contents.update(topic=data['topic'])
+    project_contents.topic = data['topic']
+    project_contents.save()
+
+    return HttpResponse(status=200)
 
 # 토픽 내용수정
 def editTopicContents(request, project_id, topic_id):
